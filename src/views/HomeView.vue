@@ -23,17 +23,6 @@
 </script>
 
 <style scoped>
-    form {
-        box-sizing: border-box;
-        padding: 2rem;
-        border-radius: 1rem;
-        background-color: hsl(0, 0%, 100%);
-        border: 4px solid hsl(0, 0%, 90%);
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-    }
-
     .titulo {
         margin-top: 17.5%;
     }
