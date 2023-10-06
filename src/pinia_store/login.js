@@ -6,6 +6,7 @@ export const useLoginStore = defineStore('login', {
     return {
         jwt: '',
         errors: '',
+        user: ''
     }
   },
   getters: {
@@ -42,5 +43,38 @@ export const useLoginStore = defineStore('login', {
         }
       }
     },
+    async register (name, email, password, confirm_password) {
+      try {
+        const url = 'http://127.0.0.1:8000/api/register'
+        const params = {
+          name,
+          email,
+          password,
+          confirm_password
+        }
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        }
+        const res = await axios.post(url, params, config)
+        const response = res.data
+  
+        if(response.errors !== undefined) {
+          this.errors = response.errors
+          return false
+        }
+        
+        this.jwt = response.access_token
+        this.user = response.user
+        return true
+
+      } catch (error) {
+        this.errors = {
+          'connection': ['Fallo en la Conexión']
+        }
+      }
+    }
   }
 })

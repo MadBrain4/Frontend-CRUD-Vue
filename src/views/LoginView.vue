@@ -10,8 +10,10 @@
                     <div class="inputs">
                         <input v-model="email" placeholder="Email" type="text" class="input">
                         <input v-model="password" placeholder="Password" type="password" class="input">
+                        <p v-if="store.errors !== ''" class="alerta">{{ store.errors }}</p>
                         <button type="submit" class="btn-enviar">Login</button>
                     </div>
+
                 </form>
             </div>
         </v-parallax>
@@ -31,10 +33,11 @@
         const success = await store.login(email.value, password.value)
 
         if (success) {
+            store.errors = ''
             console.log(store.jwt)
         }
         else {
-            alert('Fallo')
+            console.log(store.errors)
         }
     }
 </script>
@@ -83,6 +86,11 @@
 
     .btn-enviar:hover {
         background-color: green;
+    }
+
+    .alerta {
+        color: #C74E27;
+        text-align: center;
     }
 
     @media screen and (max-width: 1300px) and (min-width: 900px) {

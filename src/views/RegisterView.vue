@@ -4,19 +4,19 @@
             src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
         >
             <div class="d-flex flex-column fill-height align-center text-black">
-                <form class="bg-white d-flex flex-column align-center form">
+                <form @submit.prevent="createUser" class="bg-white d-flex flex-column align-center form">
                     <h3 class="text-h4 text">Registrarse</h3>
 
                     <div class="inputs">
-                        <input placeholder="Name" type="text" class="input">
+                        <input v-model="name" placeholder="Name" type="text" class="input">
 
-                        <input placeholder="Email" type="email" class="input">
+                        <input v-model="email" placeholder="Email" type="email" class="input">
     
-                        <input placeholder="Password" type="password" class="input">
+                        <input v-model="password" placeholder="Password" type="password" class="input">
 
-                        <input placeholder="Confirm Password" type="password" class="input">
+                        <input v-model="confirm_password" placeholder="Confirm Password" type="password" class="input">
 
-                        <button class="btn-enviar">Login</button>
+                        <button type="submit" class="btn-enviar">Register</button>
                     </div>
                 </form>
             </div>
@@ -26,8 +26,24 @@
 
 <script setup>
     import { ref } from 'vue'
+    import { useLoginStore } from '@/pinia_store/login.js'
+    const store = useLoginStore()
 
+    let name = ref('')
+    let email = ref('')
+    let password = ref('')
+    let confirm_password = ref('')
 
+    const createUser = async () => {
+        const success = await store.register(name.value, email.value, password.value, confirm_password.value)
+
+        if (success) {
+            console.log(store.jwt)
+        }
+        else {
+            console.log(store.errors)
+        }
+    }
 </script>
 
 <style scoped>
