@@ -26,6 +26,11 @@
         Register
       </v-btn>
     </router-link>
+    <router-link :to="{'name': 'dashboard'}">
+      <v-btn>
+        User
+      </v-btn>
+    </router-link>
 
 
     <v-btn icon>

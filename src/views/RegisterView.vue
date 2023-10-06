@@ -38,6 +38,7 @@
         const success = await store.register(name.value, email.value, password.value, confirm_password.value)
 
         if (success) {
+            store.errors = ''
             console.log(store.jwt)
         }
         else {
