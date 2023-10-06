@@ -4,6 +4,9 @@ import RegisterView from './../views/RegisterView.vue'
 import LoginView from './../views/LoginView.vue'
 import DashboardView from './../views/DashboardView.vue'
 
+// Pinia
+import { useLoginStore } from '@/pinia_store/login'
+
 const routes = [
   {
     path: '/',
@@ -45,8 +48,10 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const auth = false
+  const loginStore = useLoginStore()
+  const auth = loginStore.jwt !== '' ? loginStore.jwt : null
   const needAuth = to.meta.requireAuth
+
 
   if (needAuth && !auth) {
     next('login')
