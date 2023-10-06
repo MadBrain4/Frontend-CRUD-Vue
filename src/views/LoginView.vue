@@ -4,14 +4,13 @@
             src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
         >
             <div class="d-flex flex-column fill-height align-center text-black">
-                <form class="bg-white d-flex flex-column align-center form">
+                <form @submit.prevent="loginUser" class="bg-white d-flex flex-column align-center form">
                     <h3 class="text-h4 text">Login</h3>
 
                     <div class="inputs">
-                        <input placeholder="Email" type="text" class="input">
-    
-                        <input placeholder="Password" type="password" class="input">
-                        <button class="btn-enviar">Login</button>
+                        <input v-model="email" placeholder="Email" type="text" class="input">
+                        <input v-model="password" placeholder="Password" type="password" class="input">
+                        <button type="submit" class="btn-enviar">Login</button>
                     </div>
                 </form>
             </div>
@@ -21,8 +20,23 @@
 
 <script setup>
     import { ref } from 'vue'
+    import { useLoginStore } from '@/pinia_store/login.js'
 
+    const store = useLoginStore()
 
+    let email = ref('')
+    let password = ref('')
+
+    const loginUser = async () => {
+        const success = await store.login(email.value, password.value)
+
+        if (success) {
+            console.log(store.jwt)
+        }
+        else {
+            alert('Fallo')
+        }
+    }
 </script>
 
 <style scoped>
