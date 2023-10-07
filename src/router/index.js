@@ -3,6 +3,8 @@ import HomeView from './../views/HomeView.vue'
 import RegisterView from './../views/RegisterView.vue'
 import LoginView from './../views/LoginView.vue'
 import DashboardView from './../views/DashboardView.vue'
+import NoteView from './../views/NoteView.vue'
+import NoteShow from './../views/notes/NoteShow.vue'
 
 // Pinia
 import { useLoginStore } from '@/pinia_store/login'
@@ -38,6 +40,22 @@ const routes = [
     component: DashboardView,
     meta: {
       requireAuth: true,
+    }
+  },
+  {
+    path: '/notes',
+    name: 'notes',
+    component: NoteView,
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: '/notes/:note',
+    name: 'noteShow',
+    component: NoteShow,
+    meta: {
+      requireAuth: true
     }
   }
 ]

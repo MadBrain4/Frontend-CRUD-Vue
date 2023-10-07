@@ -6,6 +6,7 @@ export const useLoginStore = defineStore('login', {
     return {
         jwt: '',
         errors: '',
+        id: '',
         name: '',
         email: ''
     }
@@ -36,6 +37,7 @@ export const useLoginStore = defineStore('login', {
         }
     
         this.jwt = response.access_token
+        this.id = response.data.id
         this.name = response.data.name
         this.email = response.data.email
         this.user = response.user

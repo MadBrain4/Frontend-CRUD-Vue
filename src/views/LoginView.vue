@@ -34,10 +34,6 @@
 
         if (success) {
             store.errors = ''
-            console.log(store.jwt)
-        }
-        else {
-            console.log(store.errors)
         }
     }
 </script>

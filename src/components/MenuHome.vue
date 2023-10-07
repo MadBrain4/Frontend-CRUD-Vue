@@ -31,7 +31,11 @@
         User
       </v-btn>
     </router-link>
-
+    <router-link :to="{'name': 'notes'}">
+      <v-btn>
+        Notes
+      </v-btn>
+    </router-link>
 
     <v-btn icon>
       <v-icon>mdi-export</v-icon>

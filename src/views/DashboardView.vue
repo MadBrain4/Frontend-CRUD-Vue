@@ -1,6 +1,6 @@
 <template>
     <div>
-        Hola {{ store.name }}
+        Hola {{ store.name }}, {{ store.id }}
     </div>
 </template>
 
