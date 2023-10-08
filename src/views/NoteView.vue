@@ -17,7 +17,8 @@
                 <td>{{ note.description }}</td>
                 <td>{{ note.user.name }}</td>
                 <td>
-                    <router-link :to="{name: 'noteShow', params: {note: note.id}}">Ver</router-link>
+                    <router-link :to="{name: 'noteShow', params: {note: note.id}}" class="accion">Ver</router-link>
+                    <router-link :to="{name: 'noteEdit', params: {note: note.id}}" class="accion">Editar</router-link>
                 </td>
             </tr>
             <p v-if="errors != ''">{{ errors.connection }}</p>
@@ -35,12 +36,15 @@
 
     onMounted(async () => {
         await service.loadNotes()
-        console.log(notes.value)
     })
 </script>
 
 <style>
     .title {
         text-align: center;
+    }
+
+    .accion {
+        margin: 0 0.25em;
     }
 </style>

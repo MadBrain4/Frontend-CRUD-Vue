@@ -5,6 +5,7 @@ import { useLoginStore } from '@/pinia_store/login'
 class NoteService {
     constructor () {
         this.notes = ref([])
+        this.note = ref({})
         this.errors = ref([])
     }
 
@@ -14,6 +15,10 @@ class NoteService {
 
     getNotes () {
         return this.notes
+    }
+
+    getNote () {
+        return this.note
     }
 
     async loadNotes () {
@@ -32,6 +37,30 @@ class NoteService {
             const res = await axios.get(url, config)
             const response = res.data
             this.notes.value = response.data
+            return true
+        } catch (error) {
+            this.errors.value = {
+                'connection': ['Fallo en la Conexión']
+            }
+            return false
+        }
+    }
+
+    async loadNote (id) {
+        const loginStore = useLoginStore()
+        const authorization = `Bearer ${loginStore.jwt}`
+        const url = `http://127.0.0.1:8000/api/notes/${id}`
+        const config = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': authorization
+            }
+        }
+        try {
+            const res = axios.get(url, config)
+            const response = (await res).data
+            this.note.value = response.data
             return true
         } catch (error) {
             this.errors.value = {
