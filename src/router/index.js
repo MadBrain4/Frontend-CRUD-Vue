@@ -6,6 +6,7 @@ import DashboardView from './../views/DashboardView.vue'
 import NoteView from './../views/NoteView.vue'
 import NoteShow from './../views/notes/NoteShow.vue'
 import NoteEdit from './../views/notes/NoteEdit.vue'
+import NoteCreate from './../views/notes/NoteCreate.vue'
 
 // Pinia
 import { useLoginStore } from '@/pinia_store/login'
@@ -41,6 +42,14 @@ const routes = [
     component: DashboardView,
     meta: {
       requireAuth: true,
+    }
+  },
+  {
+    path: '/notes/create',
+    name: 'noteCreate',
+    component: NoteCreate,
+    meta: {
+      requireAuth: true
     }
   },
   {
@@ -82,6 +91,8 @@ router.beforeEach((to, from, next) => {
 
   if (needAuth && !auth) {
     next('login')
+  } else if (!needAuth && auth) {
+    next('dashboard')
   } else {
     next()
   } 

@@ -1,5 +1,6 @@
 <template>
     <h2 class="title">Note</h2>
+    <router-link :to="{name: 'noteCreate'}">Crear Nota</router-link>
     <v-table>
         <thead>
             <tr>

@@ -2,14 +2,13 @@
     <div class="container">
         <div class="cabecera">
             <router-link :to="{'name': 'notes'}">
-                <v-btn class="botonRegresar">Atras</v-btn>
-                <h3>{{ note.title }}</h3>
+                <v-btn class="botonRegresar" >Atras</v-btn>
             </router-link>
+            <h2 class="title" >{{ note.title }}</h2>
         </div>
         <v-table>
             <thead>
                 <tr>
-                    <td>Title</td>
                     <td>Description</td>
                 </tr>
             </thead>
@@ -29,7 +28,6 @@
 
     let noteId = ref('')
     const service = new NoteService()
-    const errors = service.getErrors()
     const note = service.getNote()
 
     onMounted(async () => {
@@ -43,12 +41,19 @@
 <style scoped>
     .botonRegresar {
         background-color: #F04F4F;
-        margin-top: 0.75em;
-        text-align: right;
+        align-self: center;
+        position: relative;
     }
 
     .cabecera {
         display: flex;
         flex-direction: row;
+        width: 100%;
+        padding: 0.5em
+    }
+
+    .title {
+        margin: 0 auto;
+        align-self: center;
     }
 </style>
