@@ -49,21 +49,21 @@ export const useLoginStore = defineStore('login', {
       }
     },
     async register (name, email, password, confirm_password) {
+      const url = 'http://127.0.0.1:8000/api/register'
+      const params = {
+        name,
+        email,
+        password,
+        confirm_password
+      }
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      }
       try {
-        const url = 'http://127.0.0.1:8000/api/register'
-        const params = {
-          name,
-          email,
-          password,
-          confirm_password
-        }
-        const config = {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }
-        }
-        const res = await axios.post(url, params, config)
+      const res = await axios.post(url, params, config)
         const response = res.data
   
         if(response.errors !== undefined) {
@@ -82,6 +82,8 @@ export const useLoginStore = defineStore('login', {
           'connection': ['Fallo en la Conexión']
         }
       }
+    },
+    async logout () {
     }
   },
   persist: true

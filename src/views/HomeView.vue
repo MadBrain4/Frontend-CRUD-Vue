@@ -7,10 +7,10 @@
             >
                 <div class="d-flex flex-column fill-height align-center text-black titulo">
                     <h1 class="text-h1 font-weight-thin mb-4 text-white" :elevation="4" >
-                        Qobuk
+                        Notek
                     </h1>
                     <h4 class="text-h5 text-white text-medium">
-                        Donde lo que Imaginas se Convierte en Realidad
+                        Escribe lo que imaginas
                     </h4>
                 </div>
             </v-parallax>
