@@ -16,22 +16,22 @@
         Home
       </v-btn>
     </router-link> 
-    <router-link :to="{'name': 'login'}">
+    <router-link v-if="store.jwt == ''"  :to="{'name': 'login'}">
       <v-btn>
         Login
       </v-btn>
     </router-link>
-    <router-link :to="{'name': 'register'}">
+    <router-link v-if="store.jwt == ''"  :to="{'name': 'register'}">
       <v-btn>
         Register
       </v-btn>
     </router-link>
-    <router-link :to="{'name': 'dashboard'}">
+    <router-link v-if="store.jwt != ''"  :to="{'name': 'dashboard'}">
       <v-btn>
         User
       </v-btn>
     </router-link>
-    <router-link :to="{'name': 'notes'}">
+    <router-link v-if="store.jwt != ''"  :to="{'name': 'notes'}">
       <v-btn>
         Notes
       </v-btn>
@@ -42,3 +42,9 @@
     </v-btn>
   </v-toolbar>
 </template>
+
+<script setup>
+  import { useLoginStore } from '@/pinia_store/login'
+
+  const store = useLoginStore()
+</script>

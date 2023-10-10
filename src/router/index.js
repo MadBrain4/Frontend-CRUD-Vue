@@ -26,6 +26,7 @@ const routes = [
     component: RegisterView,
     meta: {
       requireAuth: false,
+      pageLogin: true,
     }
   },
   {
@@ -34,6 +35,7 @@ const routes = [
     component: LoginView,
     meta: {
       requireAuth: false,
+      pageLogin: true,
     }
   },
   {
@@ -87,11 +89,11 @@ router.beforeEach((to, from, next) => {
   const loginStore = useLoginStore()
   const auth = loginStore.jwt !== '' ? loginStore.jwt : null
   const needAuth = to.meta.requireAuth
-
+  const pageLogin = to.meta.pageLogin || false
 
   if (needAuth && !auth) {
     next('login')
-  } else if (!needAuth && auth) {
+  } else if ((!needAuth && pageLogin) && auth) {
     next('dashboard')
   } else {
     next()

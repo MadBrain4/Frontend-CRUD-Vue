@@ -22,9 +22,11 @@
 
 <script setup>
     import { ref } from 'vue'
+    import { useRouter } from 'vue-router';
     import { useLoginStore } from '@/pinia_store/login.js'
 
     const store = useLoginStore()
+    const router = useRouter()
 
     let email = ref('')
     let password = ref('')
@@ -34,6 +36,7 @@
 
         if (success) {
             store.errors = ''
+            router.push({name: 'dashboard'})
         }
     }
 </script>

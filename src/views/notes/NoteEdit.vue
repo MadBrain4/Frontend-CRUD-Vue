@@ -23,8 +23,11 @@
 
 <script setup>
     import { onMounted, ref } from 'vue'
-    import { useRoute } from 'vue-router';
+    import { useRoute, useRouter } from 'vue-router';
     import NoteService from '@/services/NoteServices';
+
+    const route = useRoute()
+    const router = useRouter()
 
     let title = ref('')
     let description = ref('')
@@ -35,10 +38,10 @@
 
     const editNote = async () => {
         await service.editNote(noteId.value, title.value, description.value)
+        router.push({ name: 'notes' })
     }
 
     onMounted(async () => {
-        const route = useRoute()
         noteId.value = route.params.note
 
         await service.loadNote(noteId.value)
